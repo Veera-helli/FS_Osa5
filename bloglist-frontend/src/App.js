@@ -9,7 +9,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setMessage] = useState('');
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
@@ -40,9 +40,9 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      setErrorMessage('Wrong credentials');
+      setMessage('Wrong username or password!');
       setTimeout(() => {
-        setErrorMessage(null);
+        setMessage(null);
       }, 5000);
     }
   };
@@ -61,6 +61,7 @@ const App = () => {
   const blogsList = () => (
     <Bloglist
       errorMessage={errorMessage}
+      setMessage={setMessage}
       user={user}
       setUser={setUser}
       blogs={blogs}

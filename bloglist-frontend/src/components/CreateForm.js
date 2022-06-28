@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import blogService from '../services/blogs';
 
-const CreateForm = ({ setBlogs }) => {
+const CreateForm = ({ setBlogs, setMessage }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [url, setURL] = useState('');
@@ -15,12 +15,18 @@ const CreateForm = ({ setBlogs }) => {
         author,
         url,
       });
+      console.log('Created new blog!');
+      setMessage('A new blog was added!');
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
       const blogs = await blogService.getAll();
       setBlogs(blogs);
       setTitle('');
       setAuthor('');
       setURL('');
     } catch (exception) {
+      setMessage('Could not add a new blog');
       console.log('Create form exception!');
     }
   };
