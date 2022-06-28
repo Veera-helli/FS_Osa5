@@ -45,7 +45,7 @@ const Bloglist = ({
       {blogs
         .sort((a, b) => b.likes - a.likes) //sorting to order blogs by likes
         .map((blog) => (
-          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} />
+          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} user={user} />
         ))}
     </div>
   );

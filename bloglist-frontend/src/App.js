@@ -21,7 +21,11 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    const fetchBlogs = async () => {
+      const newBlogs = await blogService.getAll();
+      setBlogs(newBlogs);
+    };
+    fetchBlogs();
   }, []);
 
   const handleLogin = async (event) => {

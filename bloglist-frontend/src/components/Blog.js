@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import blogService from '../services/blogs';
 
-const Blog = ({ blog, setBlogs }) => {
+const Blog = ({ blog, setBlogs, user }) => {
   const [visible, setVisible] = useState(false);
 
   const blogStyle = {
@@ -14,6 +14,9 @@ const Blog = ({ blog, setBlogs }) => {
 
   const hideWhenVisible = { display: visible ? 'none' : '' };
   const showWhenVisible = { display: visible ? '' : 'none' };
+  const removeButtonVisible = {
+    display: user.username === blog.user.username ? '' : 'none',
+  };
 
   const toggleVisibility = () => {
     setVisible(!visible);
@@ -25,6 +28,16 @@ const Blog = ({ blog, setBlogs }) => {
     await blogService.update(blog.id, { ...blog, likes: blog.likes + 1 });
     const blogs = await blogService.getAll();
     setBlogs(blogs);
+  };
+
+  const remove = async () => {
+    //HTTP DELETE
+    if (window.confirm(`Are you sure you want to remove ${blog.name}?`)) {
+      console.log('DELETING BLOG');
+      await blogService.remove(blog.id);
+      const blogs = await blogService.getAll();
+      setBlogs(blogs);
+    }
   };
 
   return (
@@ -39,7 +52,12 @@ const Blog = ({ blog, setBlogs }) => {
       <div style={showWhenVisible}>
         {blog.url} <br></br>
         likes {blog.likes}
-        <button onClick={addLike}>like</button>
+        <button onClick={addLike}>like</button> <br></br>
+        {blog.user.name}
+        <br></br>
+        <button style={removeButtonVisible} onClick={remove}>
+          remove blog
+        </button>
       </div>
     </div>
   );
