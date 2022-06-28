@@ -10,7 +10,7 @@ const CreateForm = ({ setBlogs, setMessage, toggleVisibility }) => {
     event.preventDefault();
 
     try {
-      const newBlog = await blogService.create({
+      await blogService.create({
         title,
         author,
         url,

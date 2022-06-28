@@ -42,7 +42,7 @@ const Blog = ({ blog, setBlogs, user }) => {
 
   return (
     <div style={blogStyle}>
-      "{blog.title}" by: {blog.author}{' '}
+      {`"${blog.title}"`} by: {blog.author}{' '}
       <button style={hideWhenVisible} onClick={toggleVisibility}>
         view
       </button>

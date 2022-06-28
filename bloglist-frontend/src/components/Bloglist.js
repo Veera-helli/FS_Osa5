@@ -2,6 +2,7 @@ import Notification from './Notification';
 import CreateForm from './CreateForm';
 import Blog from './Blog';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Bloglist = ({
   errorMessage,
@@ -53,6 +54,15 @@ const Bloglist = ({
         ))}
     </div>
   );
+};
+
+Bloglist.propTypes = {
+  errorMessage: PropTypes.string.isRequired,
+  setMessage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  setUser: PropTypes.func.isRequired,
+  blogs: PropTypes.array.isRequired,
+  setBlogs: PropTypes.func.isRequired,
 };
 
 export default Bloglist;
