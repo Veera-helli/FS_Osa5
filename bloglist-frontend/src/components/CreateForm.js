@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import blogService from '../services/blogs';
 
-const CreateForm = ({ setBlogs, setMessage }) => {
+const CreateForm = ({ setBlogs, setMessage, toggleVisibility }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [url, setURL] = useState('');
@@ -60,7 +60,9 @@ const CreateForm = ({ setBlogs, setMessage }) => {
           onChange={({ target }) => setURL(target.value)}
         />
       </div>
-      <button type='submit'>create</button>
+      <button type='submit' onClick={toggleVisibility}>
+        create
+      </button>
     </form>
   );
 };

@@ -38,7 +38,11 @@ const Bloglist = ({
           <button onClick={toggleVisibility}>create new blog</button>
         </div>
         <div style={showWhenVisible}>
-          <CreateForm setBlogs={setBlogs} setMessage={setMessage} />
+          <CreateForm
+            setBlogs={setBlogs}
+            setMessage={setMessage}
+            toggleVisibility={toggleVisibility}
+          />
           <button onClick={toggleVisibility}>cancel</button>
         </div>
       </div>
