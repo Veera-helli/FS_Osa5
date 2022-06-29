@@ -1,34 +1,13 @@
 import { useState } from 'react';
-import blogService from '../services/blogs';
 
-const CreateForm = ({ setBlogs, setMessage, toggleVisibility }) => {
+const CreateForm = ({ create, toggleVisibility }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [url, setURL] = useState('');
 
-  const handleCreate = async (event) => {
+  const handleCreate = (event) => {
     event.preventDefault();
-
-    try {
-      await blogService.create({
-        title,
-        author,
-        url,
-      });
-      console.log('Created new blog!');
-      setMessage('A new blog was added!');
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-      const blogs = await blogService.getAll();
-      setBlogs(blogs);
-      setTitle('');
-      setAuthor('');
-      setURL('');
-    } catch (exception) {
-      setMessage('Could not add a new blog');
-      console.log('Create form exception!');
-    }
+    create(title, author, url);
   };
 
   return (
@@ -36,6 +15,7 @@ const CreateForm = ({ setBlogs, setMessage, toggleVisibility }) => {
       <div>
         Title:
         <input
+          id='titleInput'
           type='text'
           value={title}
           name='Title'
@@ -45,6 +25,7 @@ const CreateForm = ({ setBlogs, setMessage, toggleVisibility }) => {
       <div>
         Author:
         <input
+          id='authorInput'
           type='text'
           value={author}
           name='Author'
@@ -54,6 +35,7 @@ const CreateForm = ({ setBlogs, setMessage, toggleVisibility }) => {
       <div>
         URL:
         <input
+          id='urlInput'
           type='text'
           value={url}
           name='URL'

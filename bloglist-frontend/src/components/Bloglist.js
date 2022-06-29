@@ -40,6 +40,26 @@ const Bloglist = ({
     }
   };
 
+  const create = async (title, author, url) => {
+    try {
+      await blogService.create({
+        title,
+        author,
+        url,
+      });
+      console.log('Created new blog!');
+      setMessage('A new blog was added!');
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+      const blogs = await blogService.getAll();
+      setBlogs(blogs);
+    } catch (exception) {
+      setMessage('Could not add a new blog');
+      console.log('Create form exception!');
+    }
+  };
+
   return (
     <div>
       <h2>Blogs</h2>
@@ -58,11 +78,7 @@ const Bloglist = ({
           <button onClick={toggleVisibility}>create new blog</button>
         </div>
         <div style={showWhenVisible}>
-          <CreateForm
-            setBlogs={setBlogs}
-            setMessage={setMessage}
-            toggleVisibility={toggleVisibility}
-          />
+          <CreateForm create={create} toggleVisibility={toggleVisibility} />
           <button onClick={toggleVisibility}>cancel</button>
         </div>
       </div>
