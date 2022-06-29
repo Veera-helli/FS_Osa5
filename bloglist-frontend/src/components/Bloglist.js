@@ -1,6 +1,7 @@
 import Notification from './Notification';
 import CreateForm from './CreateForm';
 import Blog from './Blog';
+import blogService from '../services/blogs';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -19,6 +20,24 @@ const Bloglist = ({
 
   const toggleVisibility = () => {
     setVisible(!visible);
+  };
+
+  const addLike = async (blog) => {
+    //HTTP PUT
+    //console.log('adding like');
+    await blogService.update(blog.id, { ...blog, likes: blog.likes + 1 });
+    const blogs = await blogService.getAll();
+    setBlogs(blogs);
+  };
+
+  const remove = async (blog) => {
+    //HTTP DELETE
+    if (window.confirm(`Are you sure you want to remove ${blog.name}?`)) {
+      console.log('DELETING BLOG');
+      await blogService.remove(blog.id);
+      const blogs = await blogService.getAll();
+      setBlogs(blogs);
+    }
   };
 
   return (
@@ -50,7 +69,13 @@ const Bloglist = ({
       {blogs
         .sort((a, b) => b.likes - a.likes) //sorting to order blogs by likes
         .map((blog) => (
-          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} user={user} />
+          <Blog
+            key={blog.id}
+            blog={blog}
+            addLike={addLike}
+            remove={remove}
+            user={user}
+          />
         ))}
     </div>
   );
