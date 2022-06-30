@@ -16,7 +16,7 @@ describe('CreateForm', () => {
   });
 
   // 5.16
-  test('calls create', async () => {
+  test('calls create with the right inputs', async () => {
     const user = userEvent.setup();
 
     const titleInput = container.querySelector('#titleInput');
@@ -29,7 +29,6 @@ describe('CreateForm', () => {
     await user.type(urlInput, 'test.com');
     await user.click(createButton);
 
-    console.log(`00: ${createMock.mock.calls[0][0]}`);
     expect(createMock.mock.calls).toHaveLength(1);
     expect(createMock.mock.calls[0][0]).toBe('Test Title');
     expect(createMock.mock.calls[0][1]).toBe('Tester1');

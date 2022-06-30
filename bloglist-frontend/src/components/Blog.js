@@ -24,7 +24,11 @@ const Blog = ({ blog, addLike, remove, user }) => {
   return (
     <div style={blogStyle}>
       {`"${blog.title}"`} by: {blog.author}{' '}
-      <button style={hideWhenVisible} onClick={toggleVisibility}>
+      <button
+        id='view-button'
+        style={hideWhenVisible}
+        onClick={toggleVisibility}
+      >
         view
       </button>
       <button style={showWhenVisible} onClick={toggleVisibility}>
@@ -33,10 +37,17 @@ const Blog = ({ blog, addLike, remove, user }) => {
       <div id='moreInfo' style={showWhenVisible}>
         {blog.url} <br></br>
         likes {blog.likes}
-        <button onClick={() => addLike(blog)}>like</button> <br></br>
+        <button id='like-button' onClick={() => addLike(blog)}>
+          like
+        </button>{' '}
+        <br></br>
         {blog.user.name}
         <br></br>
-        <button style={removeButtonVisible} onClick={() => remove(blog)}>
+        <button
+          id='remove-button'
+          style={removeButtonVisible}
+          onClick={() => remove(blog)}
+        >
           remove blog
         </button>
       </div>

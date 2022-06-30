@@ -42,7 +42,7 @@ const CreateForm = ({ create, toggleVisibility }) => {
           onChange={({ target }) => setURL(target.value)}
         />
       </div>
-      <button type='submit' onClick={toggleVisibility}>
+      <button id='create-button' type='submit' onClick={toggleVisibility}>
         create
       </button>
     </form>
