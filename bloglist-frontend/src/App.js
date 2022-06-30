@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Bloglist from './components/Bloglist';
-import LoginForm from './components/LoginForm';
+//import LoginForm from './components/LoginForm';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -51,29 +51,34 @@ const App = () => {
     }
   };
 
-  const loginForm = () => (
-    <LoginForm
-      errorMessage={errorMessage}
-      handleLogin={handleLogin}
+  // const loginForm = () => (
+  //   <LoginForm
+  //     errorMessage={errorMessage}
+  //     handleLogin={handleLogin}
+  //     username={username}
+  //     setUsername={setUsername}
+  //     password={password}
+  //     setPassword={setPassword}
+  //   />
+  // );
+
+  const blogsList = () => (
+    <Bloglist
       username={username}
       setUsername={setUsername}
       password={password}
       setPassword={setPassword}
-    />
-  );
-
-  const blogsList = () => (
-    <Bloglist
       errorMessage={errorMessage}
       setMessage={setMessage}
       user={user}
       setUser={setUser}
       blogs={blogs}
       setBlogs={setBlogs}
+      handleLogin={handleLogin}
     />
   );
 
-  return <div>{user === null ? loginForm() : blogsList()}</div>;
+  return <div>{blogsList()}</div>;
 };
 
 export default App;

@@ -13,8 +13,14 @@ const Blog = ({ blog, addLike, remove, user }) => {
 
   const hideWhenVisible = { display: visible ? 'none' : '' };
   const showWhenVisible = { display: visible ? '' : 'none' };
+  // if no user or a wrong user is logged in the remove button is hidden
+  // remove button is only shown to the user who has added the blog
   const removeButtonVisible = {
-    display: user.username === blog.user.username ? '' : 'none',
+    display: user
+      ? user.username === blog.user.username
+        ? ''
+        : 'none'
+      : 'none',
   };
 
   const toggleVisibility = () => {
@@ -22,29 +28,33 @@ const Blog = ({ blog, addLike, remove, user }) => {
   };
 
   return (
-    <div style={blogStyle}>
+    <div className='blog' style={blogStyle}>
       {`"${blog.title}"`} by: {blog.author}{' '}
       <button
-        id='view-button'
+        className='view-button'
         style={hideWhenVisible}
         onClick={toggleVisibility}
       >
         view
       </button>
-      <button style={showWhenVisible} onClick={toggleVisibility}>
+      <button
+        id='hide-button'
+        style={showWhenVisible}
+        onClick={toggleVisibility}
+      >
         hide
       </button>
       <div id='moreInfo' style={showWhenVisible}>
         {blog.url} <br></br>
         likes {blog.likes}
-        <button id='like-button' onClick={() => addLike(blog)}>
+        <button className='like-button' onClick={() => addLike(blog)}>
           like
         </button>{' '}
         <br></br>
         {blog.user.name}
         <br></br>
         <button
-          id='remove-button'
+          className='remove-button'
           style={removeButtonVisible}
           onClick={() => remove(blog)}
         >

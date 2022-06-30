@@ -1,7 +1,6 @@
-import Notification from './Notification';
+//import Notification from './Notification';
 
 const LoginForm = ({
-  errorMessage,
   handleLogin,
   username,
   setUsername,
@@ -9,8 +8,6 @@ const LoginForm = ({
   setPassword,
 }) => (
   <div>
-    <h2>Log in to application</h2>
-    <Notification message={errorMessage} />
     <form onSubmit={handleLogin}>
       <div>
         username

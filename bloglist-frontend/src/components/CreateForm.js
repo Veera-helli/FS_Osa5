@@ -8,6 +8,9 @@ const CreateForm = ({ create, toggleVisibility }) => {
   const handleCreate = (event) => {
     event.preventDefault();
     create(title, author, url);
+    setTitle('');
+    setAuthor('');
+    setURL('');
   };
 
   return (
@@ -15,7 +18,7 @@ const CreateForm = ({ create, toggleVisibility }) => {
       <div>
         Title:
         <input
-          id='titleInput'
+          className='titleInput'
           type='text'
           value={title}
           name='Title'
@@ -25,7 +28,7 @@ const CreateForm = ({ create, toggleVisibility }) => {
       <div>
         Author:
         <input
-          id='authorInput'
+          className='authorInput'
           type='text'
           value={author}
           name='Author'
@@ -35,14 +38,18 @@ const CreateForm = ({ create, toggleVisibility }) => {
       <div>
         URL:
         <input
-          id='urlInput'
+          className='urlInput'
           type='text'
           value={url}
           name='URL'
           onChange={({ target }) => setURL(target.value)}
         />
       </div>
-      <button id='create-button' type='submit' onClick={toggleVisibility}>
+      <button
+        className='create-button'
+        type='submit'
+        onClick={toggleVisibility}
+      >
         create
       </button>
     </form>
